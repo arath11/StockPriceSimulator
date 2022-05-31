@@ -29,10 +29,7 @@ def match(words_to_search: list[str], tweets: list[str]) -> list[str]:
     return [word for tweet in tweets for word in words_to_search if word.lower() in tweet.lower()]
 
 
-scraper("elonmusk", limit=30, store_csv=True)
+scraper("elonmusk", limit=30000, store_csv=True)
 tweets = get_csv_attribute("output.csv", "tweet")
 words_to_search = get_csv_attribute("stocks.csv", "Name")
-words_filtered = set(match(words_to_search, tweets))
-
-for word in words_filtered:
-    print(word)
+trends = set(match(words_to_search, tweets))
