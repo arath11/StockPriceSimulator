@@ -31,5 +31,8 @@ def match(words_to_search: list[str], tweets: list[str]) -> list[str]:
 
 scraper("elonmusk", limit=30000, store_csv=True)
 tweets = get_csv_attribute("output.csv", "tweet")
-words_to_search = get_csv_attribute("stocks.csv", "Name")
-trends = set(match(words_to_search, tweets))
+stocks_to_search = get_csv_attribute("stocks.csv", "Name")
+symbols = get_csv_attribute("stocks.csv", "Symbol")
+dict_stocks = {name: symbol for symbol, name in zip(symbols, stocks_to_search)}
+trends = set(match(stocks_to_search, tweets))
+trends_symbols = [dict_stocks[trend] for trend in trends if trend in dict_stocks]
