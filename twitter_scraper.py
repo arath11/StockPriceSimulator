@@ -18,7 +18,7 @@ def scraper(username: str,
 
 
 def get_csv_attribute(path: str, attribute: str) -> list[str]:
-    with open(path, "r") as csvfile:
+    with open(path, "r",  encoding="utf8") as csvfile:
         reader = csv.DictReader(csvfile)
         lines = [row[attribute] for row in reader]
         return lines
